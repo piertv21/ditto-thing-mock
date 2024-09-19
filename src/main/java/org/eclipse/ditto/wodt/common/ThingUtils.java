@@ -35,7 +35,7 @@ public class ThingUtils {
     public void onStart() {
         this.checkAndCreateThing(AMBULANCE_THING_ID, AMBULANCE_THING_MODEL, "Ambulance",
         () -> {
-            this.editAttribute(AMBULANCE_THING_ID, "rel-is_approaching", "http://localhost:3003");
+            this.editAttribute(AMBULANCE_THING_ID, "rel-is_approaching", "http://localhost:3003/");
             this.editAttribute(AMBULANCE_THING_ID, "busy", false);
             this.editAttribute(AMBULANCE_THING_ID, "fuelLevel", 21.0);
             LOGGER.info("Initial state for the Ambulance was set.");
