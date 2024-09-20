@@ -38,23 +38,23 @@ public class ThingUtils {
             this.editAttribute(AMBULANCE_THING_ID, "rel-is_approaching", "http://localhost:3003/");
             this.editAttribute(AMBULANCE_THING_ID, "busy", false);
             this.editAttribute(AMBULANCE_THING_ID, "fuelLevel", 21.0);
-            LOGGER.info("Initial state for the Ambulance was set.");
+            LOGGER.info("[Ambulance] Initial state was set.");
         });
         this.checkAndCreateThing(TRAFFIC_LIGHT_THING_ID, TRAFFIC_LIGHT_THING_MODEL, "Traffic light",
         () -> {
             this.editAttribute(TRAFFIC_LIGHT_THING_ID, "is-on", false);
-            LOGGER.info("Initial state for the Traffic light was set.");
+            LOGGER.info("[Traffic light] Initial state was set.");
         });
     }
 
     public void simulatePAChanges() {
         double randomFuelLevel = Math.round(Math.random() * 1000) / 10.0;
         this.editAttribute(AMBULANCE_THING_ID, "fuelLevel", randomFuelLevel);
-        LOGGER.info("Sent new Fuel level for the Ambulance: " + randomFuelLevel);
+        LOGGER.info("[Ambulance] Sent new Fuel level: " + randomFuelLevel);
         
         boolean isFuelLevelEven = ((int) randomFuelLevel % 2 == 0);
         this.editAttribute(TRAFFIC_LIGHT_THING_ID, "is-on", isFuelLevelEven);
-        LOGGER.info("Sent new Traffic light state: " + isFuelLevelEven);
+        LOGGER.info("[Traffic light] Sent new state: " + isFuelLevelEven);
     }
 
     private void editAttribute(String thingId, String attributeName, Object attributeValue) {
@@ -88,10 +88,10 @@ public class ThingUtils {
     
     private void checkAndCreateThing(String thingId, String thingModel, String thingName, Runnable onCreationAction) {
         if (checkThingExists(thingId)) {
-            LOGGER.info(thingName + " thing already exists, skipping creation...");
+            LOGGER.info("[" + thingName + "] thing already exists, skipping creation...");
         } else {
             createThing(thingId, thingModel);
-            LOGGER.info(thingName + " does not exist and has been created!");
+            LOGGER.info("[" + thingName + "] does not exist and has been created!");
             onCreationAction.run();
         }
     }
